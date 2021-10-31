@@ -1,0 +1,14 @@
+.item-details {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 600px;
+  height: 250px;
+  background-color: #CFC;
+  padding: 5px;
+}
+.item-details__button {
+  margin-top: 35px;
+  margin-right: 10px;
+  width: 75px;
+}

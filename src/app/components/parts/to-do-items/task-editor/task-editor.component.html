@@ -1,0 +1,17 @@
+<form [className]="'item-details'">
+  <h2>{{selectedItem.name | slice : 0 : 25}}{{selectedItem.name.length > 25 ? '...' : ''}} details</h2>
+  <div><span>id: </span>{{selectedItem.id}}</div>
+  <div>
+    <label>name:
+      <textarea [(ngModel)]="selectedItem.name" [maxLength]="150" [ngModelOptions]="{standalone: true}"></textarea>
+    </label>
+  </div>
+  <div>
+    <label>is complete:
+      <input type="checkbox" [(ngModel)]="selectedItem.isComplete" [ngModelOptions]="{standalone: true}"/>
+    </label>
+  </div>
+  <input type="submit" value="Save" (click)="handleSaveButtonClick()" [className]="'item-details__button'">
+  <input type="button" value="Cancel" (click)="handleCancelButtonClick()" [className]="'item-details__button'">
+  <button class="btn btn-danger " *ngIf="selectedItem.id!==0" (click)="handleDeleteButtonClick()">Удалить</button>
+</form>

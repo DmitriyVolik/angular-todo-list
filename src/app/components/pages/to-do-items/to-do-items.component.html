@@ -1,0 +1,34 @@
+<h1>{{title}}</h1>
+<div>
+  <app-task-editor *ngIf="selectedItem" [selectedItem]="selectedItem" [resetSelectedItem]="resetSelectedItem.bind(this)"></app-task-editor>
+  <strong *ngIf="toDoItems.length > 0" [className]="'todo-count'">
+    {{toDoItems.length}} item{{toDoItems.length == 1 ? '' : 's'}}
+  </strong>
+  <div *ngIf="isLoading" [className]="'preloader'">
+    Loading...
+  </div>
+  <button (click)="newTaskClick()" type="button" class="btn btn-primary">New task</button>
+  <div *ngIf="toDoItems.length > 0; else no_content" [className]="'items'">
+    <div
+      *ngFor="let toDoItem of toDoItems"
+      [className]="'items_item'"
+      [class.selected]="toDoItem === selectedItem"
+      (click)="onItemClick(toDoItem)"
+    >
+      <h2>{{toDoItem.name | slice : 0 : 25}}{{toDoItem.name.length > 25 ? '...' : ''}} Details</h2>
+      <div><span>id: </span>{{toDoItem.id}}</div>
+      <div>
+        <span>name: </span>
+        {{toDoItem.name | uppercase | slice : 0 : 50}}{{toDoItem.name.length > 50 ? '...' : ''}}
+      </div>
+      <div>
+        <span [class.open]="!toDoItem.isComplete" [class.completed]="toDoItem.isComplete">
+          {{toDoItem.isComplete ? 'completed' : 'open'}}
+        </span>
+      </div>
+    </div>
+  </div>
+  <ng-template #no_content>
+    <div>No Tasks Yet...</div>
+  </ng-template>
+</div>
